@@ -10,7 +10,7 @@ var arr = [];
 var googleArr = [];
 
 const rl = readline.createInterface({
-  input: fs.createReadStream('list.txt')
+  input: fs.createReadStream('testList.txt')
 });
 
 rl.on('line', (line) => {
@@ -55,24 +55,22 @@ rl.on('line', (line) => {
       var open = $('table.gf-table.historical_price > tbody > tr > td:nth-child(2)');
 
       for (let j = 0; j < date.length; j++) {
-        googleArr[30 * i + j + 1] = {date: date[j].children[0].data, open: open[j].children[0].data};
+        googleArr[30 * i + j] = {date: date[j].children[0].data, open: open[j].children[0].data};
       }
     });
   }
 
-
   setTimeout(() => {
     let res = '';
-    for (let j = 1; j < arr.length; j++) {
+    for (let j = 0; j < arr.length; j++) {
       res += arr[j].date + ',' + googleArr[j].open.replace(/\n|,/g, '')
         + ',' + arr[j].price.replace(/,/g, '') + ','
         + arr[j].ratio+'\n';
     }
-    fs.writeFileSync(company.name+'.csv', res);
+    fs.writeFileSync('./data/'+company.name+'.csv', res);
 
     rl.resume();
   }, 3000);
-
 
 });
 
