@@ -34,7 +34,7 @@ const requestNaverData = (company, index, arr, googleArr) => {
       // console.log('ratio length:', ratio.length);
       // console.log('date length:', date.length);
       // console.log('price length:', price.length);
-      for (let j = 0; j < ratio.length; j++) {
+      for (let j = 0; j < Math.min(ratio.length, date.length, price.length); j++) {
         arr[(index - 1) * 20 + j] = {
           date: date[j].children[0].data, price: price[j].children[0].data,
           ratio: ratio[j].children[0].data
